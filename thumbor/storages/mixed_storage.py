@@ -83,7 +83,7 @@ class Storage(BaseStorage):
     @gen.coroutine
     def exists(self, path):
         self._init_file_storage()
-        result = yield gen.maybe_future(self.file_storage.exists(path))
+        result = yield self.file_storage.exists(path)
         raise gen.Return(result)
 
     def resolve_original_photo_path(self, request, filename):
