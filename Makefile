@@ -30,7 +30,10 @@ setup_mac:
 compile_ext:
 	@python setup.py build_ext -i
 
-test: compile_ext redis
+clean:
+	@find . -name '*.pyc' -delete
+
+test: clean compile_ext redis
 	@$(MAKE) unit coverage
 	@$(MAKE) integration_run
 	@$(MAKE) static
