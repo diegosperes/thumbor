@@ -82,8 +82,8 @@ class Storage(storages.BaseStorage):
     def get(self, path):
         abs_path = self.path_on_filesystem(path)
 
-        exist = yield self.exists(abs_path, on_filesystem=False)
-        if exist:
+        exists = yield self.exists(abs_path, on_filesystem=False)
+        if exists:
             with open(self.path_on_filesystem(path), 'r') as f:
                 raise gen.Return(f.read())
 
@@ -105,8 +105,8 @@ class Storage(storages.BaseStorage):
         file_abspath = self.path_on_filesystem(path)
         path = '%s.detectors.txt' % splitext(file_abspath)[0]
 
-        exist = yield self.exists(path, on_filesystem=False)
-        if exist:
+        exists = yield self.exists(path, on_filesystem=False)
+        if exists:
             raise gen.Return(loads(open(path, 'r').read()))
 
         raise gen.Return(None)
